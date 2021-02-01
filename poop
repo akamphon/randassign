@@ -1,0 +1,50 @@
+#!/usr/bin/python
+
+_disshite = '''\
+\\documentclass[10pt]{{article}}
+
+% Engine-specific settings
+% Detect pdftex/xetex/luatex, and load appropriate font packages.
+% This is inspired by the approach in the iftex package.
+% pdftex:
+\\ifx\\pdfmatch\\undefined
+\\else
+    \\usepackage[T1]{{fontenc}}
+    \\usepackage[utf8]{{inputenc}}
+\\fi
+% xetex:
+\\ifx\\XeTeXinterchartoks\\undefined
+\\else
+    \\usepackage{{fontspec}}
+    \\defaultfontfeatures{{Ligatures=TeX}}
+\\fi
+% luatex:
+\\ifx\\directlua\\undefined
+\\else
+    \\usepackage{{fontspec}}
+\\fi
+% End engine-specific settings
+
+\\usepackage[margin=1in]{{geometry}}
+\\usepackage[shortlabels]{{enumitem}}
+\\setlist[description]{{leftmargin=\\parindent, labelindent=\\parindent}}
+\\usepackage{{amsmath, amssymb}}
+\\usepackage{{siunitx}}
+\\usepackage{{newtxtext}}
+\\usepackage{{newtxmath}}
+
+
+\\title{{\\vspace{{-2cm}}Solutions}}
+\\date{{}}
+\\author{{}}
+
+\\begin{{document}}
+\\maketitle
+
+{solution}
+
+\\end{{document}}
+'''
+
+from randassign import make
+make(texfile='<tex_file>',multipleattempts=False,solntemplatedoc=_disshite)
